@@ -14,11 +14,11 @@ def detail(request, blog_id):
 
 
 def posts_list(request):
-    posts = Blog.objects.all().order_by('-date')
+    posts = Blog.objects.order_by('-date')
     how_much_posts_all = posts.count()
-    how_much_posts = 2
-    paginator = Paginator(posts, how_much_posts)
+    how_much_posts_on_page = 2
+    paginator = Paginator(posts, how_much_posts_on_page)
     page_number = request.GET.get('page', default=1)
     page = paginator.get_page(page_number)
 
-    return render(request, 'blog/all_blogs.html', {'posts': page, 'pag': how_much_posts_all, 'pag_2': how_much_posts})
+    return render(request, 'blog/all_blogs.html', {'posts': page, 'pag': how_much_posts_all, 'pag_2': how_much_posts_on_page})
